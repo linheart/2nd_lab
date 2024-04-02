@@ -1,13 +1,12 @@
-def counting_dup(arr):
+def counting_dup(n):
+    a = b = int(input())
     count = 0
-    for i in range(1, len(arr)):
-        if arr[i] == arr[i - 1]:
+
+    for _ in range(n - 1):
+        a = int(input())
+        if a == b:
             count += 1
+        b = a
     return count
 
-arr = [int(i) for i in input("Input number array: ").split(' ') if  i.strip()]
-
-if not arr:
-    raise Exception("Empty array")
-
-print(counting_dup(arr))
+print(counting_dup(int(input())))
