@@ -9,13 +9,4 @@ def func(S, M, N):
         return -1
     return math.ceil(S * M / N)
 
-    food = N
-    days = 1
-
-    while food <= S * M:
-        food += N
-        days += 1
-
-    return days
-
 print(func(S, M, N))
