@@ -12,8 +12,6 @@ def counting_steps(arr, v):
     return count
 
 
-
-
 n = int(input())
 arr = list(map(int, input().split()))
 
