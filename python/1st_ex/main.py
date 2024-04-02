@@ -1,3 +1,5 @@
+import math
+
 S = int(input("Input the number of days: "))
 N = int(input("Input the maximum number of units of food per day that a traveler can buy at the store: "))
 M = int(input("Input the number of units of food per day that the traveler needs to survive: "))
@@ -5,6 +7,7 @@ M = int(input("Input the number of units of food per day that the traveler needs
 def func(S, M, N):
     if S * M > (S - S // 7) * N:
         return -1
+    return math.ceil(S * M / N)
 
     food = N
     days = 1
@@ -13,6 +16,6 @@ def func(S, M, N):
         food += N
         days += 1
 
-    return days - 1
+    return days
 
 print(func(S, M, N))
