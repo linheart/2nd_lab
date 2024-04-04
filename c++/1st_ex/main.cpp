@@ -10,21 +10,21 @@ int main() {
 
   int S, M, N;
 
-	S = init(S);
-	N = init(N);
-	M = init(M);
+  S = init(S);
+  N = init(N);
+  M = init(M);
 
-	cout << func(S, M, N) << endl;
+  cout << func(S, M, N) << endl;
   return 0;
 }
 
 int init(int val) {
-	if	(!(cin >> val)) {
-		cerr << "Invalid input";
-		exit(EXIT_FAILURE);
-	}
-	
-	return val;
+  if (!(cin >> val) || val <= 0) {
+    cerr << "Invalid input";
+    exit(EXIT_FAILURE);
+  }
+
+  return val;
 }
 
 int func(int S, int M, int N) {
