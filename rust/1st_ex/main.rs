@@ -1,4 +1,4 @@
-use std::io::stdin;
+use std::{io::stdin, process};
 
 fn func(s: i32, m: i32, n: i32) -> i32 {
     if s * m > (s - s / 7) * n {
@@ -8,19 +8,23 @@ fn func(s: i32, m: i32, n: i32) -> i32 {
     }
 }
 
-fn main() {
+fn init() -> i32 {
     let mut input = String::new();
-
     stdin().read_line(&mut input).expect("Failed to read line");
-    let s: i32 = input.trim().parse().expect("Input was not an integer");
-    input.clear();
 
-    stdin().read_line(&mut input).expect("Failed to read line");
-    let n: i32 = input.trim().parse().expect("Input was not an integer");
-    input.clear();
+    match input.trim().parse::<i32>() {
+        Ok(num) if num > 0 => return num,
+        _ => {
+            println!("Invalid input");
+            process::exit(1);
+        }
+    }
+}
 
-    stdin().read_line(&mut input).expect("Failed to read line");
-    let m: i32 = input.trim().parse().expect("Input was not an integer");
+fn main() {
+    let s = init();
+    let n = init();
+    let m = init();
 
     println!("{}", func(s, m, n));
 }
