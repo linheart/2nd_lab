@@ -1,4 +1,4 @@
-use std::{io::stdin, process};
+use std::io::stdin;
 
 fn func(s: i32, m: i32, n: i32) -> i32 {
     if s * m > (s - s / 7) * n {
@@ -14,10 +14,7 @@ fn init() -> i32 {
 
     match input.trim().parse::<i32>() {
         Ok(num) if num > 0 => return num,
-        _ => {
-            println!("Invalid input");
-            process::exit(1);
-        }
+        _ => panic!("Invalid input"),
     }
 }
 
