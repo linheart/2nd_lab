@@ -4,21 +4,21 @@
 
 using namespace std;
 
-unsigned init(unsigned val);
+int init(int val);
 void err(string promt);
-void cmp(const vector<unsigned> arr, unsigned v);
-unsigned counting_steps(const vector<unsigned> arr, unsigned v);
+void cmp(const vector<int> arr, int v);
+int counting_steps(const vector<int> arr, int v);
 
 int main() {
-  unsigned n;
+  int n;
   n = init(n);
 
-  vector<unsigned> arr(n);
-  for (unsigned i = 0; i < n; i++) {
+  vector<int> arr(n);
+  for (int i = 0; i < n; i++) {
     arr[i] = init(arr[i]);
   }
 
-  unsigned v;
+  int v;
   v = init(v);
 
   cmp(arr, v);
@@ -33,20 +33,20 @@ void err(string promt) {
   exit(EXIT_FAILURE);
 }
 
-unsigned init(unsigned val) {
-  if (!(cin >> val))
+int init(int val) {
+  if (!(cin >> val) || val <= 0)
     err("Invalid input");
   return val;
 }
 
-void cmp(const vector<unsigned> arr, unsigned v) {
+void cmp(const vector<int> arr, int v) {
   if (*max_element(arr.begin(), arr.end()) > v)
     err("The volume of the watering can is not enough to water the flower");
 }
 
-unsigned counting_steps(const vector<unsigned> arr, unsigned v) {
-  unsigned count = 0;
-  unsigned tmp = v;
+int counting_steps(const vector<int> arr, int v) {
+  int count = 0;
+  int tmp = v;
 
   for (size_t i = 0; i < arr.size(); i++) {
     if (tmp < arr[i]) {
