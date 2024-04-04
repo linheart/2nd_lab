@@ -1,12 +1,21 @@
 import math
 
-S = int(input("Input the number of days: "))
-N = int(input("Input the maximum number of units of food per day that a traveler can buy at the store: "))
-M = int(input("Input the number of units of food per day that the traveler needs to survive: "))
+def err(exc):
+    raise Exception(exc)
 
-def func(S, M, N):
+def init():
+    val = int(input())
+    if val <= 0:
+        err("Invalid input")
+    return val
+
+def func(S, N, M):
     if S * M > (S - S // 7) * N:
         return -1
     return math.ceil(S * M / N)
 
-print(func(S, M, N))
+S = init()
+N = init()
+M = init()
+
+print(func(S, N, M))
