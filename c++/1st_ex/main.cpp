@@ -18,11 +18,14 @@ int main() {
   return 0;
 }
 
+void err(string promt) {
+  cerr << promt << endl;
+  exit(EXIT_FAILURE);
+}
+
 int init(int val) {
-  if (!(cin >> val) || val <= 0) {
-    cerr << "Invalid input";
-    exit(EXIT_FAILURE);
-  }
+  if (!(cin >> val) || val <= 0)
+    err("Invalid input");
 
   return val;
 }
