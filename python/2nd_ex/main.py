@@ -1,3 +1,16 @@
+def err(exc):
+    raise Exception(exc)
+
+def init():
+    val = int(input())
+    if val <= 0:
+        err("Invalid input")
+    return val
+
+def cmp(arr, v):
+    if v < max(arr):
+        err("The volume of the watering can is not enough to water the flower")
+
 def counting_steps(arr, v):
     count = 0
     tmp = v
@@ -11,16 +24,14 @@ def counting_steps(arr, v):
 
     return count
 
+n = init()
 
-n = int(input())
-arr = list(map(int, input().split()))
+arr = []
+for _ in range(n):
+    arr.append(init())
 
-if len(arr) != n:
-    raise Exception("The array does not consist of n elements")
+v = init()
 
-v = int(input())
-
-if v < max(arr):
-    raise Exception("The volume of the watering can is not enough to water the flower")
+cmp(arr, v)
 
 print(counting_steps(arr, v))
