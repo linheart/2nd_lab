@@ -5,10 +5,6 @@ import (
 	"math"
 )
 
-func err(exc string) {
-	panic(exc)
-}
-
 func initVal() int {
 	var val int
 	_, err := fmt.Scanf("%d", &val)
