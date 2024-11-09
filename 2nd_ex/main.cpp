@@ -1,29 +1,19 @@
-#include "set.h"
+#include "menu.h"
 
 using namespace std;
 
-int main() {
-  Set<string> set1;
-  set1.insert("asd");
-
-  Set<string> set2;
-  set2.insert("lol");
-  set2.insert("kek");
-
-  Set<string> *set = setUnion(set1, set2);
-
-  for (size_t i = 0; i < 100; i++) {
-    if (set->node[i]) {
-      Node<string> *cur = set->node[i];
-      while (cur) {
-        cout << cur->value << " ";
-        cur = cur->next;
-      }
-      cout << endl;
+int main(int argc, char **argv) {
+  try {
+    if (argc != 5 || string(argv[1]) != "--file" ||
+        string(argv[3]) != "--query") {
+      throw runtime_error(
+          "Err: use pattern: program --file <filename> --query <query>");
     }
-  }
 
-  delete set;
+    menu(argv[2], argv[4]);
+  } catch (const exception &e) {
+    cerr << e.what() << endl;
+  }
 
   return 0;
 }

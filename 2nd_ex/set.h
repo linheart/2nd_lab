@@ -1,24 +1,23 @@
 #ifndef SET_H // SET_H
 #define SET_H
 
-#include <functional>
 #include <iostream>
 
 #define SIZE 100
 
-template <typename T> struct Node {
-  T value;
+struct Node {
+  std::string value;
   Node *next;
 
-  Node(const T &v) : value(v), next(nullptr) {}
+  Node(const std::string &v) : value(v), next(nullptr) {}
   ~Node() { delete next; }
 };
 
-template <typename T> struct Set {
-  Node<T> **node;
+struct Set {
+  Node **node;
 
   Set() : node(nullptr) {
-    node = new Node<T> *[SIZE];
+    node = new Node *[SIZE];
     for (size_t i = 0; i < SIZE; i++) {
       node[i] = nullptr;
     }
@@ -26,9 +25,9 @@ template <typename T> struct Set {
 
   ~Set() {
     for (int i = 0; i < SIZE; i++) {
-      Node<T> *current = node[i];
+      Node *current = node[i];
       while (current != nullptr) {
-        Node<T> *tmp = current;
+        Node *tmp = current;
         current = current->next;
         delete tmp;
       }
@@ -37,14 +36,17 @@ template <typename T> struct Set {
     delete[] node;
   }
 
-  unsigned hashFunction(const T &key) {
-    std::hash<T> h;
-    return h(key) % SIZE;
+  unsigned hashFunction(const std::string &value) {
+    unsigned hash = 0;
+    for (auto ch : value) {
+      hash = (hash * 31 + ch) % SIZE;
+    }
+    return hash;
   }
 
-  void insert(const T &value) {
+  void insert(const std::string &value) {
     unsigned index = hashFunction(value);
-    Node<T> *current = node[index];
+    Node *current = node[index];
 
     while (current) {
       if (current->value == value) {
@@ -54,15 +56,15 @@ template <typename T> struct Set {
       current = current->next;
     }
 
-    Node<T> *newNode = new Node<T>(value);
+    Node *newNode = new Node(value);
     newNode->next = node[index];
     node[index] = newNode;
   }
 
-  void remove(const T &value) {
+  void remove(const std::string &value) {
     unsigned index = hashFunction(value);
-    Node<T> *current = node[index];
-    Node<T> *tmp = nullptr;
+    Node *current = node[index];
+    Node *tmp = nullptr;
 
     while (current && current->value != value) {
       tmp = current;
@@ -81,29 +83,21 @@ template <typename T> struct Set {
 
     delete current;
   }
+
+  bool find(const std::string &value) {
+    unsigned index = hashFunction(value);
+    Node *current = node[index];
+
+    while (current && current->value != value) {
+      current = current->next;
+    }
+
+    return current != nullptr;
+  }
 };
 
-template <typename T> void insertNodes(Node<T> *source, Set<T> *result) {
-  Node<T> *current = source;
-  while (current) {
-    result->insert(current->value);
-    current = current->next;
-  }
-}
-
-template <typename T> Set<T> *setUnion(Set<T> &set1, Set<T> &set2) {
-  Set<T> *set = new Set<T>;
-
-  for (size_t i = 0; i < SIZE; i++) {
-    if (set1.node[i]) {
-      insertNodes(set1.node[i], set);
-    }
-    if (set2.node[i]) {
-      insertNodes(set2.node[i], set);
-    }
-  }
-
-  return set;
-}
+Set *setUnion(Set &set1, Set &set2);
+Set *setIntersection(Set &set1, Set &set2);
+Set *setDifference(Set &set1, Set &set2);
 
 #endif // SET_H
