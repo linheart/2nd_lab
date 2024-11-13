@@ -111,9 +111,9 @@ void menu(const string &path, const string &query) {
   }
 
   if (q == "SETADD" || q == "SETDEL" || q == "SETUNION" || q == "SETINT" ||
-      q == "SETDIF" || q == "SET_AT) {
+      q == "SETDIF" || q == "SET_AT") {
     checkVal(stream, word);
-  } else if (q != "SETPRINT" && q != "SET_AT") {
+  } else if (q != "SETPRINT") {
     throw runtime_error("Err: wrong query");
   }
 
